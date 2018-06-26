@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.neuedu.entity.Dept;
 import com.neuedu.service.DeptService;
+import com.neuedu.service.EmpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -28,6 +29,14 @@ public class DeptController {
         modelMap.put("pageInfo",pageInfo);
         httpSession.setAttribute("deptPageNum",pageInfo.getPageNum());
         return "deptlist";
+    }
+
+    @RequestMapping(value = {"/deleteDeptById"})
+    public String deleteDeptById(int[] id , HttpSession httpSession){
+        deptService.deleteDeptById(id);
+
+        Integer pageNum = (Integer) httpSession.getAttribute("deptPageNum");
+        return "redirect:/dept/deptlist?pageNum=" + pageNum;
     }
 
 }

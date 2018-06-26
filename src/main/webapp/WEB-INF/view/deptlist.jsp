@@ -15,7 +15,7 @@
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th><input type="checkbox"></th>
+                        <th><input type="checkbox" class="choseAll"></th>
                         <th>#</th>
                         <th>部门名称</th>
                         <th>部门地点</th>
@@ -25,13 +25,13 @@
                 <tbody>
                     <c:forEach items="${pageInfo.list}" var="dept" varStatus="index">
                         <tr>
-                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox" class="item" value="${dept.id}"></td>
                             <td>${index.index + 1}</td>
                             <td>${dept.dname}</td>
                             <td>${dept.location}</td>
                             <td>
                                 <button type="button" class="btn btn-info">修改</button>
-                                <button type="button" class="btn btn-danger">删除</button>
+                                <button type="button" class="btn btn-danger delete-one" delete-id="${dept.id}">删除</button>
                             </td>
                         </tr>
                     </c:forEach>
@@ -41,7 +41,7 @@
         <div class="row">
             <div class="col-sm-9">
                 <button type="button" class="btn btn-primary">增加</button>
-                <button type="button" class="btn btn-danger">删除</button>
+                <button type="button" class="btn btn-danger deleteAll">删除</button>
             </div>
             <div class="col-sm-3">
                 <nav aria-label="Page navigation">
@@ -87,5 +87,48 @@
 
     <script type="text/javascript" src="${pageContext.request.contextPath}/r/js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/r/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $(".delete-one").click(function () {
+                var id = $(this).attr("delete-id");
+                var path = "${pageContext.request.contextPath}/dept/deleteDeptById?id=" + id;
+                location.href = path;
+            });
+
+            //全选的点击事件
+            $(".choseAll").click(function () {
+                /*var ischecked = $(this)[0].checked;
+                var items = $(".item");
+                if (ischecked){
+                    for(var i = 0;i <items.length;i++ ){
+                        items[i].checked = true;
+                    }
+                }else {
+                    for (var i = 0; i < items.length; i++) {
+                        items[i].checked = false;
+                    }
+                }*/
+
+                $(".item").prop("checked",$(this).prop("checked"));
+
+            });
+
+
+            $(".deleteAll").click(function () {
+                //1、拿到所有多选框状态
+                var ids = [];
+                $(".item").each(function () {
+                    var item = $(this);
+                    if (item.prop("checked")){
+                        var id = item.val();
+                        ids[ids.length] = id;
+                    }
+                });
+                var path = "${pageContext.request.contextPath}/dept/deleteDeptById?id=" + ids;
+                location.href = path;
+
+            });
+        });
+    </script>
 </body>
 </html>

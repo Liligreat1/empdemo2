@@ -40,4 +40,9 @@ public class EmpServiceImpl implements EmpService {
     public int updateEmp(Emp emp) {
         return empMapper.updateEmp(emp);
     }
+
+    @Override
+    public int deleteEmpByDeptids(int[] dept_ids) {
+        return empMapper.deleteEmpByDeptids(dept_ids);
+    }
 }

@@ -39,4 +39,12 @@ public interface EmpMapper {
      * @return
      */
     int updateEmp(@Param("emp") Emp emp);
+
+    /**
+     * 根据部门id删除员工
+     * @param
+     * @return
+     */
+    int deleteEmpByDeptids(int[] dept_ids);
+
 }
