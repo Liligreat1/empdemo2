@@ -10,7 +10,12 @@
 </head>
 <body>
 <div class="container">
-    <div class="row head"></div>
+    <div class="row head">
+        <div class="col-sm-3">
+            欢迎${user.username}
+            <img src="${pageContext.request.contextPath}/${user.headimg}" class="img-circle" height="30px" width="30px">
+        </div>
+    </div>
     <div class="row">
         <table class="table table-striped table-hover">
             <thead>

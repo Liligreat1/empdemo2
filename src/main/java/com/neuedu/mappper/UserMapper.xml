@@ -8,5 +8,8 @@
         select id , username , password , headimg from e_user where username = #{username}
     </select>
 
+    <insert id="saveUser">
+        INSERT into e_user (username,password,headimg) values (#{user.username},#{user.password},#{user.headimg})
+    </insert>
 
 </mapper>

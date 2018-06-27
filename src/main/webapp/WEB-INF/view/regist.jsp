@@ -11,7 +11,7 @@
     <div class="container">
         <div class="row head"></div>
         <div class="row body">
-            <form class="form-horizontal" id="registForm" action="${pageContext.request.contextPath}/user/regist"  method="post">
+            <form class="form-horizontal" id="registForm" action="${pageContext.request.contextPath}/user/regist"  method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="username" class="col-sm-2 control-label">用户名</label>
                     <div class="col-sm-6 username">
