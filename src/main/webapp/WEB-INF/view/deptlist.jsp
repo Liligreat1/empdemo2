@@ -10,7 +10,10 @@
 </head>
 <body>
     <div class="container">
-        <div class="row head"></div>
+        <div class="row head">
+            欢迎${user.username}
+            <img src="${pageContext.request.contextPath}/${user.headimg}" class="img-circle" height="30px" width="30px">
+        </div>
         <div class="row">
             <table class="table table-striped table-hover">
                 <thead>
@@ -40,6 +43,7 @@
         </div>
         <div class="row">
             <div class="col-sm-9">
+                <button type="button" class="btn btn-primary emp">员工列表</button>
                 <button type="button" class="btn btn-primary">增加</button>
                 <button type="button" class="btn btn-danger deleteAll">删除</button>
             </div>
@@ -127,6 +131,11 @@
                 var path = "${pageContext.request.contextPath}/dept/deleteDeptById?id=" + ids;
                 location.href = path;
 
+            });
+
+            $(".emp").click(function () {
+                var path = "${pageContext.request.contextPath}/emp/emplist";
+                location.href = path;
             });
         });
     </script>

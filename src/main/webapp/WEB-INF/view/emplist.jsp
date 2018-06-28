@@ -51,6 +51,7 @@
     </div>
     <div class="row">
         <div class="col-sm-9">
+            <button type="button" class="btn btn-primary dept">部门列表</button>
             <button type="button" class="btn btn-primary addemp">增加</button>
             <button type="button" class="btn btn-danger deleteAll">删除</button>
         </div>
@@ -176,6 +177,11 @@
         $(".update-btn").click(function () {
             var id = $(this).attr("update-id");
             var path = "${pageContext.request.contextPath}/emp/updateEmpView?id=" + id;
+            location.href = path;
+        });
+
+        $(".dept").click(function () {
+            var path = "${pageContext.request.contextPath}/dept/deptlist";
             location.href = path;
         });
     });

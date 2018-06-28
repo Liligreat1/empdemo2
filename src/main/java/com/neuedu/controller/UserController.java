@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -73,10 +74,22 @@ public class UserController {
     }
 
     @RequestMapping(value = {"/login"})
-    public void login(String username, String password, HttpServletResponse resp,HttpSession httpSession) throws IOException {
+    public void login(String username, String password,Boolean remember, HttpServletResponse resp,HttpSession httpSession) throws IOException {
         User user = userService.getUserByUsername(username);
         PrintWriter out = resp.getWriter();
         if(user != null && user.getPassword().equals(password)){
+            if(remember == true){
+                System.out.println("1");
+                Cookie cookie = new Cookie("username",username);
+                cookie.setPath("/");
+                cookie.setMaxAge(60 * 60 * 24 * 7);
+                resp.addCookie(cookie);
+            }else{
+                Cookie cookie = new Cookie("username",username);
+                cookie.setPath("/");
+                cookie.setMaxAge(0);
+                resp.addCookie(cookie);
+            }
             //将用户存入到session中
             httpSession.setAttribute("user",user);
             out.print(true);

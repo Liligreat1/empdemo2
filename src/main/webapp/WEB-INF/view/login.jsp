@@ -28,15 +28,17 @@
                 <div class="col-sm-offset-2 col-sm-10">
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox"> Remember me
+                            <input type="checkbox" id="remember"> Remember me
                         </label>
                     </div>
                 </div>
             </div>
             <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
+                <div class="col-sm-offset-2 col-sm-4">
                     <button type="button" class="btn btn-default login">登录</button>
+                    <button type="button" class="btn btn-default regist">注册</button>
                 </div>
+
             </div>
         </form>
     </div>
@@ -49,6 +51,7 @@
             $(".login").click(function () {
                 var username = $("#username").val();
                 var password = $("#password").val();
+                var remember = $("#remember").prop("checked");
                 if(username == "" || password == ""){
                     alert("用户名或密码不能为空");
                 }else{
@@ -56,7 +59,7 @@
                     $.ajax({
                         type:"post",
                         url:"${pageContext.request.contextPath}/user/login",
-                        data:"username=" + username + "&password=" + password,
+                        data:"username=" + username + "&password=" + password + "&remember=" + remember,
                         success:function (islogin) {
                             islogin = islogin.trim();
                             if(islogin == "true"){
@@ -71,6 +74,12 @@
                     })
                 }
                 
+            });
+
+
+            $(".regist").click(function () {
+                var path = "${pageContext.request.contextPath}/user/registView";
+                location.href = path;
             });
         });
     </script>
