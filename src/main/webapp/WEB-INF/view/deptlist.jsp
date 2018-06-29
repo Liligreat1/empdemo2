@@ -11,9 +11,13 @@
 <body>
     <div class="container">
         <div class="row head">
-            欢迎${user.username}
-            <img src="${pageContext.request.contextPath}/${user.headimg}" class="img-circle" height="30px" width="30px">
+            <div class="col-sm-2">
+                欢迎${user.username}
+                <img src="${pageContext.request.contextPath}/${user.headimg}" class="img-circle" height="30px" width="30px">
+            </div>
+            <a class="btn btn-primary" href="${pageContext.request.contextPath}/user/exit" role="button">退出登录</a>
         </div>
+
         <div class="row">
             <table class="table table-striped table-hover">
                 <thead>
@@ -33,7 +37,7 @@
                             <td>${dept.dname}</td>
                             <td>${dept.location}</td>
                             <td>
-                                <button type="button" class="btn btn-info">修改</button>
+                                <button type="button" class="btn btn-info change" change-id="${dept.id}">修改</button>
                                 <button type="button" class="btn btn-danger delete-one" delete-id="${dept.id}">删除</button>
                             </td>
                         </tr>
@@ -44,7 +48,7 @@
         <div class="row">
             <div class="col-sm-9">
                 <button type="button" class="btn btn-primary emp">员工列表</button>
-                <button type="button" class="btn btn-primary">增加</button>
+                <button type="button" class="btn btn-primary adddept">增加</button>
                 <button type="button" class="btn btn-danger deleteAll">删除</button>
             </div>
             <div class="col-sm-3">
@@ -99,6 +103,14 @@
                 location.href = path;
             });
 
+            $(".change").click(function () {
+                var id = $(this).attr("change-id");
+                var path = "${pageContext.request.contextPath}/dept/updataDeptView?id=" + id;
+                location.href = path;
+            });
+
+
+
             //全选的点击事件
             $(".choseAll").click(function () {
                 /*var ischecked = $(this)[0].checked;
@@ -135,6 +147,11 @@
 
             $(".emp").click(function () {
                 var path = "${pageContext.request.contextPath}/emp/emplist";
+                location.href = path;
+            });
+
+            $(".adddept").click(function () {
+                var path =  "${pageContext.request.contextPath}/dept/addDeptView";
                 location.href = path;
             });
         });

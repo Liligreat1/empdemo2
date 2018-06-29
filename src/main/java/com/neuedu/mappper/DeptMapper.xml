@@ -8,11 +8,27 @@
         select id ,dname , location from e_dept
     </select>
 
+    <select id="getCount" resultType="Integer">
+        SELECT count(id) from e_dept
+    </select>
+
+    <select id="getDeptById" resultType="com.neuedu.entity.Dept">
+        select id ,dname ,location from e_dept where id = #{id}
+    </select>
+
+    <insert id="addDept">
+        insert into e_dept (dname,location) values (#{dept.dname},#{dept.location});
+    </insert>
+
     <delete id="deleteDeptById">
         delete from e_dept where id in
         <foreach collection="array" item="id" separator="," open="(" close=")">
             #{id}
         </foreach>
     </delete>
+
+    <update id="updataDept">
+        update e_dept set dname = #{dept.dname},location = #{dept.location} where id = #{dept.id}
+    </update>
 
 </mapper>

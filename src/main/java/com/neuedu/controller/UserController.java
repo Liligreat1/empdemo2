@@ -79,7 +79,6 @@ public class UserController {
         PrintWriter out = resp.getWriter();
         if(user != null && user.getPassword().equals(password)){
             if(remember == true){
-                System.out.println("1");
                 Cookie cookie = new Cookie("username",username);
                 cookie.setPath("/");
                 cookie.setMaxAge(60 * 60 * 24 * 7);
@@ -96,5 +95,15 @@ public class UserController {
         }else {
             out.print(false);
         }
+    }
+
+    @RequestMapping(value = {"/exit"})
+    public String exit(HttpServletResponse resp,HttpSession httpSession){
+        Cookie cookie = new Cookie("username","");
+        cookie.setPath("/");
+        cookie.setMaxAge(0);
+        resp.addCookie(cookie);
+        httpSession.removeAttribute("user");
+        return "redirect:/";
     }
 }

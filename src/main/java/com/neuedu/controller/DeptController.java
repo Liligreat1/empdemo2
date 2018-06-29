@@ -39,4 +39,28 @@ public class DeptController {
         return "redirect:/dept/deptlist?pageNum=" + pageNum;
     }
 
+    @RequestMapping(value = {"/addDeptView"})
+    public String addDeptView(){
+        return "adddept";
+    }
+
+    @RequestMapping(value = ("/addDept") )
+    public String addDept(Dept dept){
+        int pageNum = deptService.addDept(dept);
+        return"redirect:/dept/deptlist?pageNum=" + pageNum;
+    }
+
+    @RequestMapping(value = {"/updataDeptView"})
+    public String updataDeptView(ModelMap modelMap,int id){
+        modelMap.put("dept",deptService.getDeptById(id));
+        return "updatadept";
+    }
+
+    @RequestMapping(value = {"/updataDept"})
+    public String updataDept(Dept dept,HttpSession httpSession){
+        deptService.updataDept(dept);
+        Integer pageNum = (Integer) httpSession.getAttribute("deptPageNum");
+        return "redirect:/dept/deptlist?pageNum=" + pageNum;
+    }
+
 }

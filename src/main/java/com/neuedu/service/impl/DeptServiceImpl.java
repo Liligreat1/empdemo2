@@ -25,9 +25,31 @@ public class DeptServiceImpl implements DeptService{
     }
 
     @Override
+    public int getCount() {
+        return deptMapper.getCount();
+    }
+
+    @Override
     public int deleteDeptById(int[] ids) {
         int count = deptMapper.deleteDeptById(ids);
         empMapper.deleteEmpByDeptids(ids);
         return count;
+    }
+
+    @Override
+    public int addDept(Dept dept) {
+        deptMapper.addDept(dept);
+        int pageNum = deptMapper.getCount() / 10;
+        return deptMapper.getCount() % 10 == 0?pageNum : pageNum + 1;
+    }
+
+    @Override
+    public Dept getDeptById(int id) {
+        return deptMapper.getDeptById(id);
+    }
+
+    @Override
+    public int updataDept(Dept dept) {
+        return deptMapper.updataDept(dept);
     }
 }

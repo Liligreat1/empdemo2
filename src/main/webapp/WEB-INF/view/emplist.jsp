@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>emplist</title>
@@ -11,10 +11,13 @@
 <body>
 <div class="container">
     <div class="row head">
-        <div class="col-sm-3">
+        <div class="col-sm-2">
             欢迎${user.username}
             <img src="${pageContext.request.contextPath}/${user.headimg}" class="img-circle" height="30px" width="30px">
         </div>
+        <a class="btn btn-primary" href="${pageContext.request.contextPath}/user/exit" role="button">退出登录</a>
+            <%--<input type="button" value="退出此次登陆" id="exit">--%>
+
     </div>
     <div class="row">
         <table class="table table-striped table-hover">
@@ -183,6 +186,11 @@
         $(".dept").click(function () {
             var path = "${pageContext.request.contextPath}/dept/deptlist";
             location.href = path;
+        });
+
+
+        $("#exit").click(function () {
+            alert(1);
         });
     });
 
